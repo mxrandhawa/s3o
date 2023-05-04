@@ -1,6 +1,7 @@
+@prefix : <http://www.w3.org/2002/07/owl#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix s3o: <http://www.iot4win.org.uk/diim/ontologies/s3o#> .
+@prefix s3o: <http://www.co-ode.org/ontologies/s3o#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -13,41 +14,44 @@
 #    Object Properties
 #################################################################
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#has_Similarity
+###  http://www.co-ode.org/ontologies/s3o#has_Similarity
 s3o:has_Similarity rdf:type owl:ObjectProperty ;
-                   rdfs:domain s3o:Term ;
+                   rdfs:domain s3o:Document ,
+                               s3o:Term ;
                    rdfs:range s3o:Similarity .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#ref_IoT_Data
+###  http://www.co-ode.org/ontologies/s3o#ref_IoT_Data
 s3o:ref_IoT_Data rdf:type owl:ObjectProperty ;
                  rdfs:domain s3o:Similarity ;
                  rdfs:range s3o:IoT_Data .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#ref_Ontology
+###  http://www.co-ode.org/ontologies/s3o#ref_Ontology
 s3o:ref_Ontology rdf:type owl:ObjectProperty ;
                  rdfs:domain s3o:Similarity ;
                  rdfs:range s3o:Ontology .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#ref_Term
+###  http://www.co-ode.org/ontologies/s3o#ref_Term
 s3o:ref_Term rdf:type owl:ObjectProperty ;
              rdfs:domain s3o:Similarity ;
              rdfs:range s3o:Term .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#term_Used_by
+###  http://www.co-ode.org/ontologies/s3o#term_Used_by
 s3o:term_Used_by rdf:type owl:ObjectProperty ;
                  owl:inverseOf s3o:uses_Term ;
                  rdfs:domain s3o:Term ;
-                 rdfs:range s3o:IoT_Data ,
+                 rdfs:range s3o:Document ,
+                            s3o:IoT_Data ,
                             s3o:Ontology .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#uses_Term
+###  http://www.co-ode.org/ontologies/s3o#uses_Term
 s3o:uses_Term rdf:type owl:ObjectProperty ;
-              rdfs:domain s3o:IoT_Data ,
+              rdfs:domain s3o:Document ,
+                          s3o:IoT_Data ,
                           s3o:Ontology ;
               rdfs:range s3o:Term .
 
@@ -56,17 +60,17 @@ s3o:uses_Term rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#serialization_format
+###  http://www.co-ode.org/ontologies/s3o#serialization_format
 s3o:serialization_format rdf:type owl:DatatypeProperty ;
                          rdfs:domain owl:Thing .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#similarity_value
+###  http://www.co-ode.org/ontologies/s3o#similarity_value
 s3o:similarity_value rdf:type owl:DatatypeProperty ;
                      rdfs:domain s3o:Similarity .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#uri
+###  http://www.co-ode.org/ontologies/s3o#uri
 s3o:uri rdf:type owl:DatatypeProperty ;
         rdfs:domain owl:Thing .
 
@@ -75,34 +79,89 @@ s3o:uri rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#IoT_Data
+###  http://www.co-ode.org/ontologies/s3o#Bigram_Term_Similarity
+s3o:Bigram_Term_Similarity rdf:type owl:Class ;
+                           rdfs:subClassOf s3o:Term_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Document
+s3o:Document rdf:type owl:Class ;
+             rdfs:subClassOf owl:Thing .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Document_Similarity
+s3o:Document_Similarity rdf:type owl:Class ;
+                        rdfs:subClassOf s3o:Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Fivegram_Term_Similarity
+s3o:Fivegram_Term_Similarity rdf:type owl:Class ;
+                             rdfs:subClassOf s3o:Term_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Fourgram_Term_Similarity
+s3o:Fourgram_Term_Similarity rdf:type owl:Class ;
+                             rdfs:subClassOf s3o:Term_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#IoT_Data
 s3o:IoT_Data rdf:type owl:Class ;
-             rdfs:subClassOf owl:Thing .
+             rdfs:subClassOf s3o:Document .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#Ontology
+###  http://www.co-ode.org/ontologies/s3o#LSI_Document_Similarity
+s3o:LSI_Document_Similarity rdf:type owl:Class ;
+                            rdfs:subClassOf s3o:Document_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Ontology
 s3o:Ontology rdf:type owl:Class ;
-             rdfs:subClassOf owl:Thing .
+             rdfs:subClassOf s3o:Document .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#SSM_Similarity
-s3o:SSM_Similarity rdf:type owl:Class ;
-                   rdfs:subClassOf s3o:Similarity .
+###  http://www.co-ode.org/ontologies/s3o#SSM_Bigram_Term_Similarity
+s3o:SSM_Bigram_Term_Similarity rdf:type owl:Class ;
+                               rdfs:subClassOf s3o:Bigram_Term_Similarity .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#Similarity
+###  http://www.co-ode.org/ontologies/s3o#SSM_Unigram_Term_Similarity
+s3o:SSM_Unigram_Term_Similarity rdf:type owl:Class ;
+                                rdfs:subClassOf s3o:Unigram_Term_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Similarity
 s3o:Similarity rdf:type owl:Class ;
                rdfs:subClassOf owl:Thing .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#Term
+###  http://www.co-ode.org/ontologies/s3o#Term
 s3o:Term rdf:type owl:Class ;
          rdfs:subClassOf owl:Thing .
 
 
-###  http://www.iot4win.org.uk/diim/ontologies/s3o#W2V_Similarity
-s3o:W2V_Similarity rdf:type owl:Class ;
-                   rdfs:subClassOf s3o:Similarity .
+###  http://www.co-ode.org/ontologies/s3o#Term_Similarity
+s3o:Term_Similarity rdf:type owl:Class ;
+                    rdfs:subClassOf s3o:Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Trigram_Term_Similarity
+s3o:Trigram_Term_Similarity rdf:type owl:Class ;
+                            rdfs:subClassOf s3o:Term_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Unigram_Term_Similarity
+s3o:Unigram_Term_Similarity rdf:type owl:Class ;
+                            rdfs:subClassOf s3o:Term_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Word2Vec_Bigram_Term_Similarity
+s3o:Word2Vec_Bigram_Term_Similarity rdf:type owl:Class ;
+                                    rdfs:subClassOf s3o:Bigram_Term_Similarity .
+
+
+###  http://www.co-ode.org/ontologies/s3o#Word2Vec_Unigram_Term_Similarity
+s3o:Word2Vec_Unigram_Term_Similarity rdf:type owl:Class ;
+                                     rdfs:subClassOf s3o:Unigram_Term_Similarity .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
