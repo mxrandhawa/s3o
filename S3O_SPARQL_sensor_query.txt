@@ -1,0 +1,16 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX s3o: <http://www.co-ode.org/ontologies/s3o#>
+
+SELECT ?term   ?sim ?sim_val ?sim_onto ?sim_iot ?sim_term WHERE {
+	?term rdf:type s3o:Term;
+	s3o:has_Similarity ?sim.
+	?sim s3o:similarity_value ?sim_val.
+	?sim s3o:ref_IoT_Data ?sim_iot.
+	 ?sim s3o:ref_Ontology ?sim_onto.
+	 ?sim s3o:ref_Term ?sim_term     
+	   
+	 FILTER(?term = s3o:sensor && ?sim_val > 0.9)	
+}
+ORDER BY DESC (?sim_val) 
